@@ -1,1 +1,7 @@
-{"username":"clydeclark","title":"Project","description":"description","installation":"install","usage":"use","collaborators":"me","license":"BSD 3"}
+clydeclark
+        
+        
+        
+        
+        
+        undefined

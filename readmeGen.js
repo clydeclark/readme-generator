@@ -42,7 +42,8 @@ inquirer
         }
     ])
     .then(function (response) {
-        fs.writeFile("./SaveFile/Readme.md", JSON.stringify(response), function (error) {
+        let formattedData = formatMD(response);
+        fs.writeFile("./SaveFile/Readme.md", formattedData, function (error) {
             if (error) {
                 return console.log(error);
             }
@@ -61,4 +62,12 @@ inquirer
 
     })
 
-// 
+function formatMD(response) {
+    return `${response.username}
+        ${response.title}
+        ${response.description}
+        ${response.installation}
+        ${response.usage}
+        ${response.collaborators}
+        ${response.lisense}`
+}
