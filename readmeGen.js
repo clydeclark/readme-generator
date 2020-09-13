@@ -11,28 +11,38 @@ inquirer
         },
         {
             type: "input",
-            message: "What is the title?",
+            message: "What is your email address?",
+            name: "email"
+        },
+        {
+            type: "input",
+            message: "What is the project's name?",
             name: "title"
         },
         {
             type: "input",
-            message: "What is the description?",
+            message: "Write a short description of the project?",
             name: "description"
         },
         {
             type: "input",
-            message: "What are the installation instructions?",
+            message: "What command should be run to install dependencies?",
             name: "installation"
         },
         {
             type: "input",
-            message: "What are the usage instructions?",
+            message: "What command should be run to run tests?",
+            name: "test"
+        },
+        {
+            type: "input",
+            message: "What does the user need to know about using the repo?",
             name: "usage"
         },
         {
             type: "input",
-            message: "Who are the collaborators?",
-            name: "collaborators"
+            message: "How to collaborate?",
+            name: "collaborate"
         },
         {
             type: "list",
@@ -47,10 +57,8 @@ inquirer
             if (error) {
                 return console.log(error);
             }
-            console.log("Success!")
+            console.log("Readme Generated!")
         })
-
-        // get response values to display inside the documnet
 
         // use template literals and newlines to format information for the file
 
@@ -63,11 +71,55 @@ inquirer
     })
 
 function formatMD(response) {
-    return `${response.username}
-        ${response.title}
-        ${response.description}
-        ${response.installation}
-        ${response.usage}
-        ${response.collaborators}
-        ${response.lisense}`
+    return `# ${response.title}
+
+## Description
+
+${response.description}
+
+## Table of Contents
+
+* [Installation](#installation)
+
+* [Usage](#usage)
+
+* [License](#license)
+    
+* [Contributing](#contributing)
+    
+* [Tests](#tests)
+    
+* [Questions](#questions)
+
+## Installation
+
+To install necessary dependencies, run the following command:
+
+\`\`\`
+${response.installation}
+\`\`\`
+
+## Usage
+
+${response.usage}
+
+## License
+
+${response.license}
+
+## Contributing
+
+${response.collaborate}
+
+## Tests
+
+To run tests, run the following command:
+
+\`\`\`
+${response.test}
+\`\`\`
+
+## Questions
+
+Send questions to ${response.email}. You can find my work at [clydeclark](https://github.com/${response.username}).`
 }
