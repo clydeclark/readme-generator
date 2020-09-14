@@ -52,7 +52,8 @@ inquirer
         }
     ])
     .then(function (response) {
-        let formattedData = formatMD(response);
+        let licenseBadge = setBadge(response.license)
+        let formattedData = formatMD(response, licenseBadge);
         fs.writeFile("./SaveFile/Readme.md", formattedData, function (error) {
             if (error) {
                 return console.log(error);
@@ -60,18 +61,14 @@ inquirer
             console.log("Readme Generated!")
         })
 
-        // use template literals and newlines to format information for the file
-
-        // add markdown
-        // use hashtags and astericks into template literals to format file
         // add badges
         //  Google how to add badges
         // Is there a better way to refactor than to make it one big string?
 
     })
 
-function formatMD(response) {
-    return `# ${response.title}
+function formatMD(response, licenseBadge) {
+    return `# ${response.title} ${licenseBadge}
 
 ## Description
 
@@ -123,3 +120,19 @@ ${response.test}
 
 Send questions to ${response.email}. You can find my work at [clydeclark](https://github.com/${response.username}).`
 }
+
+function setBadge(license) {
+    if (license === "MIT") {
+        return "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
+    } else if (license === "APACHE 2.0") {
+        return "[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
+    } else if (license === "GPL 3.0") {
+        return "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)";
+    } else if (license === "BSD 3") {
+        return "[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)";
+    } else {
+        return "";
+    }
+}
+
+// "MIT", "APACHE 2.0", , "BSD 3"
