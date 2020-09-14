@@ -52,19 +52,17 @@ inquirer
         }
     ])
     .then(function (response) {
-        let licenseBadge = setBadge(response.license)
+        // get proper link for license
+        let licenseBadge = setBadge(response.license);
+        // format readme
         let formattedData = formatMD(response, licenseBadge);
+        // write to file
         fs.writeFile("./SaveFile/Readme.md", formattedData, function (error) {
             if (error) {
                 return console.log(error);
             }
             console.log("Readme Generated!")
         })
-
-        // add badges
-        //  Google how to add badges
-        // Is there a better way to refactor than to make it one big string?
-
     })
 
 function formatMD(response, licenseBadge) {
@@ -134,5 +132,3 @@ function setBadge(license) {
         return "";
     }
 }
-
-// "MIT", "APACHE 2.0", , "BSD 3"
